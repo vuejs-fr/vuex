@@ -56,7 +56,7 @@ Voilà l'idée de base derrière Vuex, inspiré par [Flux](https://facebook.gith
 
 ### Quand l'utiliser ?
 
-Bien que Vuex nous aide à gérer une state partagé, il apporte aussi le coût de nouveaux concepts et _boilerplate_. C'est un compromis entre la productivité à court terme et à long terme.
+Bien que Vuex nous aide à gérer un state partagé, il apporte aussi le coût de nouveaux concepts et _boilerplate_. C'est un compromis entre la productivité à court terme et à long terme.
 
 Si vous n'avez jamais créé une _Single Page Application_ à grande échelle et que vous sautez directement dans Vuex, cela peut paraître verbeux et intimidant. C'est parfaitement normal &mdash; si votre application est simple, vous vous en sortirez sans doute très bien sans Vuex. Un simple [bus d'event global](http://vuejs.org/guide/components.html#Non-Parent-Child-Communication) pourrait très bien vous suffire. Mais si vous devez créer une SPA à moyenne ou grande échelle, il y a des chances que vous vous trouviez dans des situations qui vous feront penser à une meilleure façon de gérer le state en-dehors de votre composant Vue, et Vuex sera naturellement la prochaine étape pour vous. Voici une bonne citation de Dan Abramov, l'auteur de Redux :
 
