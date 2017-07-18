@@ -43,7 +43,7 @@ const app = new Vue({
 })
 ```
 
-En fournissant l'option `store` à l'instance racine, le store sera injecté dans tous les composants enfants de la racine et sera disponible sur ceux-ci avec `this.$store`. Mettons à jours notre implémentation de `Counter` :
+En fournissant l'option `store` à l'instance racine, le store sera injecté dans tous les composants enfants de la racine et sera disponible sur ceux-ci avec `this.$store`. Mettons à jour notre implémentation de `Counter` :
 
 ``` js
 const Counter = {
@@ -81,7 +81,7 @@ export default {
 }
 ```
 
-Il est également possible de fournir un tableau de chaînes de caractères à `mapState` lorsque le nom de la propriété du state du store est la même que celui du composant.
+Il est également possible de fournir un tableau de chaînes de caractères à `mapState` lorsque le nom de la propriété du state du store est le même que celui du composant.
 
 ``` js
 computed: mapState([
@@ -106,4 +106,4 @@ computed: {
 
 ### Les composants peuvent toujours avoir un state local
 
-Utiliser Vuex ne signifie pas que vous devez mettre **tout** votre state dans Vuex. Bien que le fait de mettre plus de state dans Vuex rende vos mutations de state plus explicites et plus debuggables, parfois il peut aussi rendre le code plus verbeux et indirect. Si une partie de state appartient directement à un seul composant, il est parfaitement sain de la laisser dans le state local. Assurez vous de prendre en compte les avantages et inconvénients d'une telle décision afin de vous adaptez le mieux aux besoins de votre application.
+Utiliser Vuex ne signifie pas que vous devez mettre **tout** votre state dans Vuex. Bien que le fait de mettre plus de state dans Vuex rende vos mutations de state plus explicites et plus debuggables, parfois il peut aussi rendre le code plus verbeux et indirect. Si une partie de state appartient directement à un seul composant, il est parfaitement sain de la laisser dans le state local. Assurez vous de prendre en compte les avantages et inconvénients d'une telle décision afin de vous adapter le mieux aux besoins de votre application.
