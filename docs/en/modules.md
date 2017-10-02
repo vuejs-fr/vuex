@@ -132,9 +132,9 @@ Les accesseurs et actions sous espace de nom reçoivent des `getters`, `dispatch
 
 #### Accéder aux propriétés globales dans les modules à espace de nom
 
-Si vous voulez utiliser des états et accesseurs globaux, `rootState` et `rootGetters` sont passés en 3e et 4e arguments des fonctions d'accès et sont également exposés en tant que propriété de l'objet `context` passé aux fonctions d'action.
+Si vous voulez utiliser des états et accesseurs globaux, `rootState` et `rootGetters` sont passés en 3ᵉ et 4ᵉ arguments des fonctions d'accès et sont également exposés en tant que propriété de l'objet `context` passé aux fonctions d'action.
 
-Pour propager les actions ou les mutations actées dans l'espace de nom global, passez `{ root: true }` en 3e argument à `dispatch` et `commit`.
+Pour propager les actions ou les mutations actées dans l'espace de nom global, passez `{ root: true }` en 3ᵉ argument à `dispatch` et `commit`.
 
 ``` js
 modules: {
@@ -143,7 +143,7 @@ modules: {
 
     getters: {
       // Les `getters` sont localisés dans le module des accesseurs
-      // vous pouvez utiliser `rootGetters` via le 4e argument des accesseurs
+      // vous pouvez utiliser `rootGetters` via le 4ᵉ argument des accesseurs
       someGetter (state, getters, rootState, rootGetters) {
         getters.someOtherGetter // -> 'foo/someOtherGetter'
         rootGetters.someOtherGetter // -> 'someOtherGetter'
