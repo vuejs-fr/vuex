@@ -68,7 +68,7 @@ Vous pouvez aussi passer des arguments aux accesseurs en retournant une fonction
 ```js
 getters: {
   // ...
-  getTodoById: (state, getters) => (id) => {
+  getTodoById: (state) => (id) => {
     return state.todos.find(todo => todo.id === id)
   }
 }
