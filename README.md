@@ -10,10 +10,12 @@ Nous traduisons les fichiers directement dans le dossier `en` sans les renommer.
 
 ```
 git fetch upstream
-git merge upstream/master
+git merge working upstream/master
 ```
 
 d'obtenir des conflits **sur les pages déjà traduites** et ainsi maintenir la documentation à jour en fonction des modifications à travers **les documents déjà traduits**.
+
+Note : `git remote add upstream https://github.com/vuetifyjs/vuetifyjs.com.git` est nécessaire au préalable pour utiliser les commandes ci-dessus.
 
 ### Traduction
 
