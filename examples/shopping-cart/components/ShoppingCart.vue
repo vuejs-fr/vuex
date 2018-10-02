@@ -3,7 +3,9 @@
     <h2>Your Cart</h2>
     <p v-show="!products.length"><i>Please add some products to cart.</i></p>
     <ul>
-      <li v-for="product in products">
+      <li
+        v-for="product in products"
+        :key="product.id">
         {{ product.title }} - {{ product.price | currency }} x {{ product.quantity }}
       </li>
     </ul>
@@ -14,19 +16,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters({
+    ...mapState({
+      checkoutStatus: state => state.cart.checkoutStatus
+    }),
+    ...mapGetters('cart', {
       products: 'cartProducts',
-      checkoutStatus: 'checkoutStatus',
       total: 'cartTotalPrice'
     })
   },
   methods: {
     checkout (products) {
-      this.$store.dispatch('checkout', products)
+      this.$store.dispatch('cart/checkout', products)
     }
   }
 }
