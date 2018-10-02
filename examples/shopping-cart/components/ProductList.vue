@@ -1,11 +1,13 @@
 <template>
   <ul>
-    <li v-for="product in products">
+    <li
+      v-for="product in products"
+      :key="product.id">
       {{ product.title }} - {{ product.price | currency }}
       <br>
       <button
         :disabled="!product.inventory"
-        @click="addToCart(product)">
+        @click="addProductToCart(product)">
         Add to cart
       </button>
     </li>
@@ -13,17 +15,17 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
-  computed: mapGetters({
-    products: 'allProducts'
+  computed: mapState({
+    products: state => state.products.all
   }),
-  methods: mapActions([
-    'addToCart'
+  methods: mapActions('cart', [
+    'addProductToCart'
   ]),
   created () {
-    this.$store.dispatch('getAllProducts')
+    this.$store.dispatch('products/getAllProducts')
   }
 }
 </script>

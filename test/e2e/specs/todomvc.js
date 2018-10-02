@@ -1,7 +1,7 @@
 module.exports = {
   'todomvc': function (browser) {
     browser
-    .url('http://localhost:8080/todomvc/')
+      .url('http://localhost:8080/todomvc/')
       .waitForElementVisible('.todoapp', 1000)
       .assert.notVisible('.main')
       .assert.notVisible('.footer')
@@ -135,9 +135,9 @@ module.exports = {
 
     // toggle all
     browser
-      .click('.toggle-all')
+      .click('label[for="toggle-all"]')
       .assert.count('.todo.completed', 3)
-      .click('.toggle-all')
+      .click('label[for="toggle-all"]')
       .assert.count('.todo:not(.completed)', 3)
       .end()
 

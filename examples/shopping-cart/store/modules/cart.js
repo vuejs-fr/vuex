@@ -1,19 +1,16 @@
 import shop from '../../api/shop'
-import * as types from '../mutation-types'
 
 // initial state
 // shape: [{ id, quantity }]
 const state = {
-  added: [],
+  items: [],
   checkoutStatus: null
 }
 
 // getters
 const getters = {
-  checkoutStatus: state => state.checkoutStatus,
-
   cartProducts: (state, getters, rootState) => {
-    return state.added.map(({ id, quantity }) => {
+    return state.items.map(({ id, quantity }) => {
       const product = rootState.products.all.find(product => product.id === id)
       return {
         title: product.title,
@@ -33,47 +30,61 @@ const getters = {
 // actions
 const actions = {
   checkout ({ commit, state }, products) {
-    const savedCartItems = [...state.added]
-    commit(types.SET_CHECKOUT_STATUS, null)
+    const savedCartItems = [...state.items]
+    commit('setCheckoutStatus', null)
     // empty cart
-    commit(types.SET_CART_ITEMS, { items: [] })
+    commit('setCartItems', { items: [] })
     shop.buyProducts(
       products,
-      () => commit(types.SET_CHECKOUT_STATUS, 'successful'),
+      () => commit('setCheckoutStatus', 'successful'),
       () => {
-        commit(types.SET_CHECKOUT_STATUS, 'failed')
+        commit('setCheckoutStatus', 'failed')
         // rollback to the cart saved before sending the request
-        commit(types.SET_CART_ITEMS, { items: savedCartItems })
+        commit('setCartItems', { items: savedCartItems })
       }
     )
+  },
+
+  addProductToCart ({ state, commit }, product) {
+    commit('setCheckoutStatus', null)
+    if (product.inventory > 0) {
+      const cartItem = state.items.find(item => item.id === product.id)
+      if (!cartItem) {
+        commit('pushProductToCart', { id: product.id })
+      } else {
+        commit('incrementItemQuantity', cartItem)
+      }
+      // remove 1 item from stock
+      commit('products/decrementProductInventory', { id: product.id }, { root: true })
+    }
   }
 }
 
 // mutations
 const mutations = {
-  [types.ADD_TO_CART] (state, { id }) {
-    state.checkoutStatus = null
-    const record = state.added.find(product => product.id === id)
-    if (!record) {
-      state.added.push({
-        id,
-        quantity: 1
-      })
-    } else {
-      record.quantity++
-    }
+  pushProductToCart (state, { id }) {
+    state.items.push({
+      id,
+      quantity: 1
+    })
   },
 
-  [types.SET_CART_ITEMS] (state, { items }) {
-    state.added = items
+  incrementItemQuantity (state, { id }) {
+    const cartItem = state.items.find(item => item.id === id)
+    cartItem.quantity++
   },
 
-  [types.SET_CHECKOUT_STATUS] (state, status) {
+  setCartItems (state, { items }) {
+    state.items = items
+  },
+
+  setCheckoutStatus (state, status) {
     state.checkoutStatus = status
   }
 }
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,
